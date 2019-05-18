@@ -42,10 +42,11 @@ set autoread
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
-let mapleader = ","
+let mapleader = ";"
 
 " Fast saving
 nmap <leader>w :w!<cr>
+nmap <leader>q :q!<cr>
 
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
@@ -139,10 +140,11 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 try
-    colorscheme desert
+    colorscheme default
 catch
 endtry
 
+set showtabline=0
 set background=dark
 
 " Set extra options when running in GUI mode
@@ -173,14 +175,19 @@ set noswapfile
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
-set expandtab
+"set expandtab
+set noexpandtab
+set number
+set relativenumber
 
 " Be smart when using tabs ;)
 set smarttab
 
 " 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
+"set shiftwidth=4
+"set tabstop=4
+set shiftwidth=8
+set tabstop=8
 
 " Linebreak on 500 characters
 set lbr
