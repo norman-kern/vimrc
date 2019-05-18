@@ -380,3 +380,52 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
+
+set colorcolumn=81
+
+if has("cscope") && filereadable("/usr/bin/cscope")
+   set csprg=/usr/bin/cscope
+   set csto=0
+   set cst
+   set nocsverb
+   " add any database in current directory
+   if filereadable("cscope.out")
+      cs add cscope.out
+   " else add database pointed to by environment
+   elseif $CSCOPE_DB != ""
+      cs add $CSCOPE_DB
+   endif
+   set csverb
+endif
+" )"
+
+nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+nmap css :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap csg :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap csc :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap cst :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap cse :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap csf :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap csi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap csd :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+set timeoutlen=3000
+
+autocmd Filetype * AnyFoldActivate
+let g:anyfold_fold_comments=1
+set foldlevel=0
+hi Folded term=NONE cterm=NONE
+
+set showtabline=1
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
